@@ -1,4 +1,26 @@
+-- local actions = require("diffview.nvim")
 return {
+ -- {
+ --  "sindrets/diffview.nvim",
+ --  -- config = function()
+ --  --  local actions = require("diffview.nvim")
+ --  --
+	-- 	-- require("diffview").setup({
+ --  -- keymaps = {
+ --  --   { "n", "<leader>]",  actions.conflict_choose("theirs"),      { desc = "Choose the THEIRS version of a conflict" } },
+ --  --   { "n", "<leader>[",  actions.conflict_choose("ours"),        { desc = "Choose the OURS version of a conflict" } },
+ --  --  },
+ --  --
+	-- 	-- })
+ --  -- end,
+ --  -- opts = {
+ --  --  keymaps = {
+ --  --   { "n", "<leader>]",  actions.conflict_choose("theirs"),      { desc = "Choose the THEIRS version of a conflict" } },
+ --  --   { "n", "<leader>[",  actions.conflict_choose("ours"),        { desc = "Choose the OURS version of a conflict" } },
+ --  --  },
+ --  --
+ --  -- },
+ -- },
   -- You can also add new plugins here as well:
   -- Add plugins, the lazy syntax
   -- "andweeb/presence.nvim",
@@ -9,4 +31,12 @@ return {
   --     require("lsp_signature").setup()
   --   end,
   -- },
-}
+  -- {
+  --   "stevearc/dressing.nvim",
+  --   opts = {
+  --     input = {
+  --       title_pos = "center",
+  --     },
+  --   },
+  -- },
+ }

@@ -4,24 +4,36 @@ return {
     "goolord/alpha-nvim",
     opts = function(_, opts)
       -- customize the dashboard header
+      -- opts.section.header.val = {
+      --   " █████  ███████ ███KK███ ██████   ██████",
+      --   "██   ██ ██         ██    ██   ██ ██    ██",
+      --   "███████ ███████    ██    ██████  ██    ██",
+      --   "██   ██      ██    ██    ██   ██ ██    ██",
+      --   "██   ██ ███████    ██    ██   ██  ██████",
+      --   " ",
+      --   "    ███    ██ ██    ██ ██ ███    ███",
+      --   "    ████   ██ ██    ██ ██ ████  ████",
+      --   "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
+      --   "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
+      --   "    ██   ████   ████   ██ ██      ██",
+      -- }
       opts.section.header.val = {
-        " █████  ███████ ████████ ██████   ██████",
-        "██   ██ ██         ██    ██   ██ ██    ██",
-        "███████ ███████    ██    ██████  ██    ██",
-        "██   ██      ██    ██    ██   ██ ██    ██",
-        "██   ██ ███████    ██    ██   ██  ██████",
-        " ",
-        "    ███    ██ ██    ██ ██ ███    ███",
-        "    ████   ██ ██    ██ ██ ████  ████",
-        "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
-        "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
-        "    ██   ████   ████   ██ ██      ██",
+        " __   ________    ",
+        "|██| _\\_____  \\ ",
+        "|██|/  ____/   ",
+        "|████/       \\  ",
+        "|██|██\\_______ \\",
+        "     \\/       \\/",
       }
       return opts
     end,
   },
   -- You can disable default plugins as follows:
+  { "akinsho/toggleterm.nvim", enabled = false },
+
+  -- { "sanfusu/neovim-undotree", lazy = false, },
   -- { "max397574/better-escape.nvim", enabled = false },
+  -- { "rcarriga/nvim-notify", enabled = false },
   --
   -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
   -- {
