@@ -6,10 +6,7 @@ return {
     local diag = require "user.plugins.heirline.diagnostics"
     local tabline = require "user.plugins.heirline.tabline"
     local status = require "astronvim.utils.status"
-    local tools = require "user.tools"
-    local icons = tools.icons
     local sc = require "user.plugins.heirline.statuscolumn"
-    local colors = require "user.plugins.heirline.colors"
 
     opts.opts = {
       disable_winbar_cb = function(args)
@@ -55,14 +52,12 @@ return {
 
     -- opts.tabline = false
     opts.tabline = {
-      custom.ViModeSmall(" " .. icons.Moon2),
-      custom.vi_mode_inverse_colors(icons.powerline.block .. icons.powerline.right_rounded .. " "),
+      custom.tabline_mode_l(),
       tabline.Tabline,
       comp.fill(),
       tabline.Tablist,
       tabline.fuzzy_time(),
-      custom.vi_mode_inverse_colors(" " .. icons.powerline.left_rounded .. icons.powerline.block, colors.segment1),
-      custom.ViModeSmall(icons.Moon1 .. " "),
+      custom.tabline_mode_r(),
     }
 
     opts.statuscolumn = vim.fn.has "nvim-0.9" == 1

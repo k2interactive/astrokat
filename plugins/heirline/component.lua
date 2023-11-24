@@ -1,10 +1,10 @@
 local M = {}
 
-local status = require "astronvim.utils.status"
-local colors_fallback = require("astronvim.utils.status.env").fallback_colors
 local colors = require "user.plugins.heirline.colors"
+local colors_fallback = require("astronvim.utils.status.env").fallback_colors
 local comp = require "astronvim.utils.status.component"
 local get_hl = require("heirline.utils").get_highlight
+local status = require "astronvim.utils.status"
 local tools = require "user.tools"
 local icons = tools.icons
 local path = tools.path
@@ -19,40 +19,6 @@ local priority = {
   Navigation = 30,
 }
 
-M.vi_mode_config = {
-  mode_names = tools.mode,
-  mode_colors_bg = {
-    n = get_hl("Keyword").fg, --       "red",
-    i = get_hl("CursorLineNr").fg, --       "green",
-    v = get_hl("CursorLine").bg, --      "cyan",
-    V = get_hl("CursorLine").bg, --      "cyan",
-    ["\22"] = get_hl("CursorLine").bg, -- "cyan",
-    c = "black",
-    s = "purple",
-    S = "purple",
-    ["\19"] = "purple",
-    R = "orange",
-    r = "orange",
-    ["!"] = "red",
-    t = "black",
-  },
-  mode_colors_fg = {
-    n = colors_fallback.dark_bg, --        "red",
-    i = colors_fallback.dark_bg, --       "green",
-    v = get_hl("CursorLineNr").fg, --        "cyan",
-    V = get_hl("CursorLineNr").fg, --       "cyan",
-    ["\22"] = get_hl("CursorLineNr").fg, --  "cyan",
-    c = "#00ff00", --        "orange",
-    s = "black", --       "purple",
-    S = "black", --       "purple",
-    ["\19"] = "black", -- "purple",
-    R = "black", --       "orange",
-    r = "black", --       "orange",
-    ["!"] = "black", --   "red",
-    t = "#00ff00", --       "red",
-  },
-}
-
 local ViModeFull = {
   -- get vim current mode, this information will be required by the provider
   -- and the highlight functions, so we compute it only once per component
@@ -63,13 +29,15 @@ local ViModeFull = {
   -- To be extra meticulous, we can also add some vim statusline syntax to
   -- control the padding and make sure our string is always at least 2
   -- characters long. Plus a nice Icon.
-  provider = function(self) return " " .. icons.VimIcon .. " %2(" .. M.vi_mode_config.mode_names[self.mode] .. "%) " end,
+  provider = function(self)
+    return " " .. icons.VimIcon .. " %2(" .. tools.vi_mode_config.mode_names[self.mode] .. "%) "
+  end,
   -- Same goes for the highlight. Now the foreground will change according to the current mode.
   hl = function(self)
     local mode = self.mode:sub(1, 1) -- get only the first mode character
     return {
-      fg = M.vi_mode_config.mode_colors_fg[mode],
-      bg = M.vi_mode_config.mode_colors_bg[mode],
+      fg = tools.vi_mode_config.mode_colors_fg[mode],
+      bg = tools.vi_mode_config.mode_colors_bg[mode],
       bold = true,
     }
   end,
@@ -93,7 +61,7 @@ function M.vi_mode_inverse_colors(text, bg)
       local mode = self.mode:sub(1, 1)
       return {
         bg = bg,
-        fg = M.vi_mode_config.mode_colors_bg[mode],
+        fg = tools.vi_mode_config.mode_colors_bg[mode],
       }
     end,
     update = {
@@ -107,6 +75,20 @@ function M.vi_mode_inverse_colors(text, bg)
   }
 end
 
+function M.tabline_mode_l()
+  return {
+    M.vi_mode_small(" " .. icons.Moon2),
+    M.vi_mode_inverse_colors(icons.powerline.block .. icons.powerline.right_rounded .. " "),
+  }
+end
+
+function M.tabline_mode_r()
+  return {
+    M.vi_mode_inverse_colors(" " .. icons.powerline.left_rounded .. icons.powerline.block, colors.segment1),
+    M.vi_mode_small(icons.Moon1 .. " "),
+  }
+end
+
 function M.k2color_text(opts)
   return {
     provider = opts.text,
@@ -117,7 +99,7 @@ function M.k2color_text(opts)
   }
 end
 
-function M.ViModeSmall(text)
+function M.vi_mode_small(text)
   return {
     {
       init = function(self) self.mode = vim.fn.mode(1) end,
@@ -125,8 +107,8 @@ function M.ViModeSmall(text)
       hl = function(self)
         local mode = self.mode:sub(1, 1)
         return {
-          fg = M.vi_mode_config.mode_colors_fg[mode],
-          bg = M.vi_mode_config.mode_colors_bg[mode],
+          fg = tools.vi_mode_config.mode_colors_fg[mode],
+          bg = tools.vi_mode_config.mode_colors_bg[mode],
         }
       end,
       update = {
@@ -327,7 +309,7 @@ end
 function M.k2mode_r()
   return {
     M.vi_mode_inverse_colors(" ", colors.segment2),
-    M.ViModeSmall(icons.VimIcon .. " "),
+    M.vi_mode_small(icons.VimIcon .. " "),
   }
 end
 

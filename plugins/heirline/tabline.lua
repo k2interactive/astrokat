@@ -19,12 +19,8 @@ function M.fuzzy_time()
         self.time = tools.FuzzyTime()
         return self.time
       end,
-      init = function(self)
-        self.mode = vim.fn.mode(1)
-        self.time = ""
-      end,
+      init = function(self) self.time = "" end,
       hl = {
-        -- fg = colors.light_text,
         fg = get_hl("keyword").fg,
         bg = colors.segment1,
       },
