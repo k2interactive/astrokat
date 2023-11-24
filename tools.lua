@@ -1,8 +1,7 @@
 local M = {}
--- return {
 
--- local M = {}
--- M.icons = {
+local get_hl = require("heirline.utils").get_highlight
+
 M.icons = {
   Close = " ",
 
@@ -90,72 +89,86 @@ M.icons = {
   },
 }
 
-M.mode = setmetatable({ -- change the strings if you like it vvvvverbose!
-  n = "N",
-  no = "N?",
-  nov = "N?",
-  noV = "N?",
-  ["no\22"] = "N?",
-  niI = "Ni",
-  niR = "Nr",
-  niV = "Nv",
-  nt = "Nt",
-  v = "V",
-  vs = "V-Lines",
-  V = "V-Line",
-  Vs = "V-Lines",
-  ["\22"] = "V-Block",
-  ["\22s"] = "V-Blocks",
-  s = "S",
-  S = "S_",
-  ["\19"] = "^S",
-  i = "I",
-  ic = "Ic",
-  ix = "Ix",
-  R = "R",
-  Rc = "Rc",
-  Rx = "Rx",
-  Rv = "Rv",
-  Rvc = "Rv",
-  Rvx = "Rv",
-  c = "C",
-  cv = "Ex",
-  r = "...",
-  rm = "M",
-  ["r?"] = "?",
-  ["!"] = "!",
-  t = "T",
-}, {
-  __call = function(self, raw_mode) return self[raw_mode] end,
-})
-
-M.mode_lable = {
-  normal = "NORMAL",
-  op = "OP",
-  visual = "VISUAL",
-  visual_lines = "VISUAL LINES",
-  visual_block = "VISUAL BLOCK",
-  select = "SELECT",
-  block = "BLOCK",
-  insert = "INSERT",
-  replace = "REPLACE",
-  v_replace = "V-REPLACE",
-  command = "COMMAND",
-  enter = "ENTER",
-  more = "MORE",
-  confirm = "CONFIRM",
-  shell = "SHELL",
-  terminal = "TERMINAL",
-  none = "NONE",
+M.vi_mode_config = {
+  -- mode_names = M.mode,
+  mode_names = setmetatable({ -- change the strings if you like it vvvvverbose!
+    n = "N",
+    no = "N?",
+    nov = "N?",
+    noV = "N?",
+    ["no\22"] = "N?",
+    niI = "Ni",
+    niR = "Nr",
+    niV = "Nv",
+    nt = "Nt",
+    v = "V",
+    vs = "V-Lines",
+    V = "V-Line",
+    Vs = "V-Lines",
+    ["\22"] = "V-Block",
+    ["\22s"] = "V-Blocks",
+    s = "S",
+    S = "S_",
+    ["\19"] = "^S",
+    i = "I",
+    ic = "Ic",
+    ix = "Ix",
+    R = "R",
+    Rc = "Rc",
+    Rx = "Rx",
+    Rv = "Rv",
+    Rvc = "Rv",
+    Rvx = "Rv",
+    c = "C",
+    cv = "Ex",
+    r = "...",
+    rm = "M",
+    ["r?"] = "?",
+    ["!"] = "!",
+    t = "T",
+  }, {
+    __call = function(self, raw_mode) return self[raw_mode] end,
+  }),
+  mode_colors_bg = {
+    n = get_hl("Keyword").fg, --       "red",
+    i = get_hl("CursorLineNr").fg, --       "green",
+    v = get_hl("CursorLine").bg, --      "cyan",
+    V = get_hl("CursorLine").bg, --      "cyan",
+    ["\22"] = get_hl("CursorLine").bg, -- "cyan",
+    c = "black",
+    s = "purple",
+    S = "purple",
+    ["\19"] = "purple",
+    R = "orange",
+    r = "orange",
+    ["!"] = "red",
+    t = "black",
+  },
+  mode_colors_fg = {
+    n = "black", --        "red",
+    i = "black", --       "green",
+    v = get_hl("CursorLineNr").fg, --        "cyan",
+    V = get_hl("CursorLineNr").fg, --       "cyan",
+    ["\22"] = get_hl("CursorLineNr").fg, --  "cyan",
+    c = "#00ff00", --        "orange",
+    s = "black", --       "purple",
+    S = "black", --       "purple",
+    ["\19"] = "black", -- "purple",
+    R = "black", --       "orange",
+    r = "black", --       "orange",
+    ["!"] = "black", --   "red",
+    t = "#00ff00", --       "red",
+  },
 }
 
-M.path = {}
-function M.path.home(path) return vim.fn.fnamemodify(path, ":~") end
-function M.path.home_s(path) return vim.fn.pathshorten(vim.fn.fnamemodify(path, ":~"), 3) end
-function M.path.relative(path) return vim.fn.fnamemodify(path, ":.") end
-function M.path.relative_s(path) return vim.fn.pathshorten(vim.fn.fnamemodify(path, ":."), 3) end
-function M.path.filename(path) return vim.fn.fnamemodify(path, ":t") end
-function M.path.short(path) return vim.fn.pathshorten(path, 3) end
+M.path = {
+  home = function(path) return vim.fn.fnamemodify(path, ":~") end,
+  home_s = function(path) return vim.fn.pathshorten(vim.fn.fnamemodify(path, ":~"), 3) end,
+  relative = function(path) return vim.fn.fnamemodify(path, ":.") end,
+  relative_s = function(path) return vim.fn.pathshorten(vim.fn.fnamemodify(path, ":."), 3) end,
+  filename = function(path) return vim.fn.fnamemodify(path, ":t") end,
+  short = function(path) return vim.fn.pathshorten(path, 3) end,
+}
 
 function M.toggle_comment_on_nl()
   local fopts = vim.opt.formatoptions:get()
