@@ -9,6 +9,7 @@ return {
     },
     "nvim-lua/plenary.nvim",
     "debugloop/telescope-undo.nvim",
+    "nvim-telescope/telescope-hop.nvim",
   },
   cmd = "Telescope",
   keys = {
@@ -24,6 +25,7 @@ return {
     require("telescope").load_extension "zoxide"
     return {
       extensions = {
+        hop = require "user.plugins.telescope.hop",
         undo = require "user.plugins.telescope.undo",
       },
       defaults = {
@@ -45,13 +47,34 @@ return {
             ["<C-p>"] = actions.cycle_history_prev,
             ["<C-j>"] = actions.move_selection_next,
             ["<C-k>"] = actions.move_selection_previous,
+            -- IMPORTANT
+            -- either hot-reloaded or `function(prompt_bufnr) telescope.extensions.hop.hop end`
+            ["<C-h>"] = function(prompt_bufnr) require("telescope").extensions.hop.hop(prompt_bufnr) end, -- hop.hop_toggle_selection
+            -- custom hop loop to multi selects and sending selected entries to quickfix list
+            ["<C-space>"] = function(prompt_bufnr)
+              local opts = {
+                callback = actions.toggle_selection,
+                loop_callback = actions.send_selected_to_qflist,
+              }
+              require("telescope").extensions.hop._hop_loop(prompt_bufnr, opts)
+            end,
           },
           n = {
             ["q"] = actions.close,
           },
         },
       },
+      pickers = {
+        diagnostics = {
+          theme = "dropdown",
+          layout_config = {
+            width = 0.95,
+          },
+        },
+      },
       require("telescope").load_extension "undo",
+      -- -- needs to be called in user/init/polish
+      -- require("telescope").load_extension "hop",
     }
   end,
   config = require "plugins.configs.telescope",

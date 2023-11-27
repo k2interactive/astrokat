@@ -28,6 +28,15 @@ return {
   },
 
   lsp = {
+    mappings = {
+      n = {
+        ["<leader>ld"] = {
+          function() require("telescope.builtin").diagnostics { bufnr = 0 } end,
+          noremap = true,
+          desc = "Buffer diagnostics",
+        },
+      },
+    },
     -- customize lsp formatting options
     formatting = {
       -- control auto formatting on save
@@ -99,6 +108,8 @@ return {
     --     ["~/%.config/foo/.*"] = "fooscript",
     --   },
     -- }
+
+    require("telescope").load_extension "hop"
   end,
 
   heirline = {
