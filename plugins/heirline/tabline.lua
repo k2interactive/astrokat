@@ -76,6 +76,8 @@ local TablineFileName = {
     unique_path = {},
     file_icon = false,
     surround = false,
+    file_modified = false,
+    file_read_only = false,
     hl = function(self)
       if self.is_visible and self.is_active then
         local h = get_hl "TabLineSel"
