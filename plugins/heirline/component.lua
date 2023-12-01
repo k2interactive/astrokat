@@ -3,6 +3,7 @@ local M = {}
 local colors = require "user.plugins.heirline.colors"
 local colors_fallback = require("astronvim.utils.status.env").fallback_colors
 local comp = require "astronvim.utils.status.component"
+local provider = require "astronvim.utils.status.provider"
 local get_hl = require("heirline.utils").get_highlight
 local status = require "astronvim.utils.status"
 local tools = require "user.tools"
@@ -310,6 +311,12 @@ function M.k2mode_r()
   return {
     M.vi_mode_inverse_colors(" ", colors.segment2),
     M.vi_mode_small(icons.VimIcon .. " "),
+  }
+end
+
+function M.k2_extra_indicators()
+  return {
+    { provider = provider.spell { str = "  " } },
   }
 end
 

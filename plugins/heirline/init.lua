@@ -26,6 +26,7 @@ return {
       comp.fill(),
       comp.cmd_info(),
       comp.fill(),
+      custom.k2_extra_indicators(),
       diag.k2diag(),
       -- comp.lsp(),
       custom.k2navigation(),
