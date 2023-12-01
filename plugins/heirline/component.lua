@@ -295,12 +295,12 @@ function M.k2navigation()
       pos_visual(),
     },
     {
-      M.vi_mode_inverse_colors(" ", colors.segment2),
+      M.k2color_text { text = " ", fg = colors.segment2 },
       navBuilder "%1(%l%):%-2(%c%)",
       pos_visual(),
     },
     {
-      M.vi_mode_inverse_colors(" ", colors.segment2),
+      M.k2color_text { text = " ", fg = colors.segment2 },
       navBuilder "%1(%l%):%-2(%c%)",
     },
   }
