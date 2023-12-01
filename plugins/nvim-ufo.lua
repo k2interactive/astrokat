@@ -38,7 +38,7 @@ return {
       local totalLines = vim.api.nvim_buf_line_count(0)
       local foldedLines = endLnum - lnum
       local sizeInBuf = foldedLines / totalLines * 100
-      local fill = "·······································"
+      local fill = "·········"
       local suffix = (" 󰘕 %d lines %d%% %s"):format(foldedLines, sizeInBuf, fill)
       local sufWidth = vim.fn.strdisplaywidth(suffix)
       local targetWidth = width - sufWidth
