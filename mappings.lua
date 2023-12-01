@@ -3,6 +3,7 @@ local is_available = require("astronvim.utils").is_available
 -- mappings here will show in whichkey
 return {
   n = {
+    ["<leader>v"] = { name = "ENVironments" },
     ---------------------------------------------------------------------------
     -- disable Astro Defaults -------------------------------------------------
     ---------------------------------------------------------------------------
@@ -27,6 +28,22 @@ return {
       function() require("user.tools").toggle_comment_on_nl() end,
       desc = "Toggle comment-on-new-line",
     },
+
+    ---------------------------------------------------------------------------
+    -- LSP/DAP ----------------------------------------------------------------
+    ---------------------------------------------------------------------------
+
+    --- From lsp/mappings.lua
+    -- ["gl"] = { function() vim.diagnostic.open_float() end, desc = "Hover diagnostics" },
+
+    -- ["<leader>ld"] = {
+    --   function() require("telescope.builtin").diagnostics { bufnr = 0 } end,
+    --   noremap = true,
+    --   desc = "Buffer diagnostics",
+    -- },
+
+    ["<leader>lH"] = { function() require("garbage-day.utils").stop_lsp() end, desc = "Garbage stop LSP" },
+    ["<leader>lg"] = { function() require("garbage-day.utils").start_lsp() end, desc = "Garbage start LSP" },
 
     ---------------------------------------------------------------------------
     -- Astro Control ----------------------------------------------------------
@@ -79,7 +96,11 @@ return {
       desc = "Load last session",
     },
 
-    ["<leader>gD"] = { "<cmd>DiffviewOpen<cr>", desc = "Open Diffview-Nvim", silent = true },
+    ["<leader>gD"] = {
+      function() require("user.tools").toggle_diffview() end,
+      desc = "Open Diffview-Nvim",
+      silent = true,
+    },
     ["<leader>gg"] = { "<cmd>lua require'lazygit'.lazygit()<cr>", desc = "LazyGit", silent = true },
 
     ---------------------------------------------------------------------------

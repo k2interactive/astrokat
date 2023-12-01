@@ -2,6 +2,20 @@ local M = {}
 
 local get_hl = require("heirline.utils").get_highlight
 
+function M.toggle_diffview()
+  local lib = require "diffview.lib"
+  local view = lib.get_current_view()
+
+  if view then
+    -- Diffview present
+    vim.cmd "DiffviewClose"
+    vim.cmd "WindowsEnableAutoWidth"
+  else
+    vim.cmd "WindowsDisableAutowidth"
+    vim.cmd "DiffviewOpen"
+  end
+end
+
 M.icons = {
   Close = " ",
 
@@ -80,6 +94,33 @@ M.icons = {
   0xe3cc:        0xe3d2:        0xe3d8:        0xe3de: 
   0xe3cd:        0xe3d3:        0xe3d9:        0xe3df: 
   ]],
+
+  clocks = {
+    midnight = "󱑊 ",
+    one = "󱐿 ",
+    two = "󱑀 ",
+    three = "󱑁 ",
+    four = "󱑂 ",
+    five = "󱑃 ",
+    six = "󱑄 ",
+    seven = "󱑑 ",
+    eight = "󱑒 ",
+    nine = "󱑎 ",
+    ten = "󱑔 ",
+    eleven = "󱑕 ",
+    tweleve = "󱑖 ",
+    thirteen = "󱑋 ",
+    fourteen = "󱑌 ",
+    fifteen = "󱑍 ",
+    sixteen = "󱑎 ",
+    seventeen = "󱑏 ",
+    eighteen = "󱑐 ",
+    nineteen = "󱑅 ",
+    twenty = "󱑆 ",
+    twentyOne = "󱑇 ",
+    twentyTwo = "󱑈 ",
+    twentyThree = "󱑉 ",
+  },
 
   circles = {
     quarter = "◔",
