@@ -23,7 +23,6 @@ return {
       },
     },
   },
-
   init = function()
     vim.o.fillchars = [[eob:~,fold:-,foldopen:,foldsep: ,foldclose:]]
     vim.o.foldcolumn = "1" -- '0' is not bad
@@ -31,44 +30,62 @@ return {
     vim.o.foldlevelstart = 99
     vim.o.foldenable = true
   end,
-
   config = function(_, opts)
-    local handler = function(virtText, lnum, endLnum, width, truncate)
-      local newVirtText = {}
+    -- local handler = function(virtText, lnum, endLnum, width, truncate)
+    local handler = function(virtText, lnum, endLnum, _, _)
+      local trunc = function(str, w)
+        local str_width = vim.fn.strdisplaywidth(str)
+        if str_width > w then
+          -- chop chop
+          return string.sub(str, 1, w)
+        end
+        return str --- length 70
+      end
+
+      local return_val = {}
+      local fill = "·"
+
       local totalLines = vim.api.nvim_buf_line_count(0)
       local foldedLines = endLnum - lnum
       local sizeInBuf = foldedLines / totalLines * 100
-      local fill = "·········"
+
       local suffix = (" 󰘕 %d lines %d%% %s"):format(foldedLines, sizeInBuf, fill)
-      local sufWidth = vim.fn.strdisplaywidth(suffix)
-      local targetWidth = width - sufWidth
-      -- print("Target width: "..targetWidth)
-      local curWidth = 0
+
+      local target_width = 80
+      local header_cutoff = 70
+
+      local current_width = 0
+
       for _, chunk in ipairs(virtText) do
-        local chunkText = chunk[1]
-        local chunkWidth = vim.fn.strdisplaywidth(chunkText)
-        if targetWidth > curWidth + chunkWidth then
-          table.insert(newVirtText, chunk)
+        local chunk_text = chunk[1]
+        local chunk_width = vim.fn.strdisplaywidth(chunk_text)
+
+        if header_cutoff >= current_width + chunk_width then
+          table.insert(return_val, chunk)
         else
-          chunkText = truncate(chunkText, targetWidth - curWidth)
+          chunk_text = trunc(chunk_text, header_cutoff - current_width)
+
           local hlGroup = chunk[2]
-          table.insert(newVirtText, { chunkText, hlGroup })
-          chunkWidth = vim.fn.strdisplaywidth(chunkText)
-          -- str width returned from truncate() may less than 2nd argument, need padding
-          if curWidth + chunkWidth < targetWidth then
-            suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
-          end
+          table.insert(return_val, { chunk_text, hlGroup })
+          current_width = header_cutoff
+
           break
         end
-        curWidth = curWidth + chunkWidth
+
+        current_width = current_width + chunk_width
       end
-      local rAlignAppndx = math.max(math.min(vim.opt.textwidth["_value"], width - 1) - curWidth - sufWidth, 0)
-      suffix = (" "):rep(rAlignAppndx) .. suffix
-      table.insert(newVirtText, { suffix, "MoreMsg" })
-      return newVirtText
+
+      local fill_amount = target_width - current_width
+
+      suffix = (fill):rep(fill_amount) .. suffix
+      table.insert(return_val, { suffix, "MoreMsg" })
+
+      return return_val
     end
+
     opts["fold_virt_text_handler"] = handler
     require("ufo").setup(opts)
+
     vim.keymap.set("n", "zR", require("ufo").openAllFolds)
     vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
     vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
