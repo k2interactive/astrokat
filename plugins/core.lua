@@ -28,6 +28,9 @@ return {
       return opts
     end,
   },
+
+  { "akinsho/flutter-tools.nvim" },
+
   -- You can disable default plugins as follows:
   { "akinsho/toggleterm.nvim", enabled = false },
 
