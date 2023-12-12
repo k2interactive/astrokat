@@ -2,6 +2,18 @@ local M = {}
 
 local get_hl = require("heirline.utils").get_highlight
 
+function M.toggle_window_auto_resize()
+  if vim.g.window_size_enable_auto_true then
+    vim.cmd "WindowsDisableAutowidth"
+    vim.g.window_size_enable_auto_true = false
+    vim.notify("Window auto resizing off", vim.log.levels.INFO)
+  else
+    vim.cmd "WindowsEnableAutowidth"
+    vim.g.window_size_enable_auto_true = true
+    vim.notify("Window auto resizing on", vim.log.levels.INFO)
+  end
+end
+
 function M.toggle_diffview()
   local lib = require "diffview.lib"
   local view = lib.get_current_view()
@@ -9,7 +21,7 @@ function M.toggle_diffview()
   if view then
     -- Diffview present
     vim.cmd "DiffviewClose"
-    vim.cmd "WindowsEnableAutoWidth"
+    if vim.g.window_size_enable_auto_true then vim.cmd "WindowsEnableAutowidth" end
   else
     vim.cmd "WindowsDisableAutowidth"
     vim.cmd "DiffviewOpen"
@@ -76,9 +88,11 @@ M.icons = {
   ScrollText = "",
   VimIcon = " ",
   PathSeparator = "",
+  Folder1 = "󰉋",
+  Folder2 = " ",
 
-  Moon1 = " ",
-  Moon2 = "",
+  Moon1 = " ",
+  Moon2 = " ",
 
   lunar = [[
   0xe38d:        0xe393:        0xe399:        0xe39f:        0xe3a5: 
@@ -96,30 +110,30 @@ M.icons = {
   ]],
 
   clocks = {
-    midnight = "󱑊 ",
-    one = "󱐿 ",
-    two = "󱑀 ",
-    three = "󱑁 ",
-    four = "󱑂 ",
-    five = "󱑃 ",
-    six = "󱑄 ",
-    seven = "󱑑 ",
-    eight = "󱑒 ",
-    nine = "󱑎 ",
-    ten = "󱑔 ",
-    eleven = "󱑕 ",
-    tweleve = "󱑖 ",
-    thirteen = "󱑋 ",
-    fourteen = "󱑌 ",
-    fifteen = "󱑍 ",
-    sixteen = "󱑎 ",
-    seventeen = "󱑏 ",
-    eighteen = "󱑐 ",
-    nineteen = "󱑅 ",
-    twenty = "󱑆 ",
-    twentyOne = "󱑇 ",
-    twentyTwo = "󱑈 ",
-    twentyThree = "󱑉 ",
+    ["00"] = "󱑊 ",
+    ["01"] = "󱐿 ",
+    ["02"] = "󱑀 ",
+    ["03"] = "󱑁 ",
+    ["04"] = "󱑂 ",
+    ["05"] = "󱑃 ",
+    ["06"] = "󱑄 ",
+    ["07"] = "󱑑 ",
+    ["08"] = "󱑒 ",
+    ["09"] = "󱑎 ",
+    ["10"] = "󱑔 ",
+    ["11"] = "󱑕 ",
+    ["12"] = "󱑖 ",
+    ["13"] = "󱑋 ",
+    ["14"] = "󱑌 ",
+    ["15"] = "󱑍 ",
+    ["16"] = "󱑎 ",
+    ["17"] = "󱑏 ",
+    ["18"] = "󱑐 ",
+    ["19"] = "󱑅 ",
+    ["20"] = "󱑆 ",
+    ["21"] = "󱑇 ",
+    ["22"] = "󱑈 ",
+    ["23"] = "󱑉 ",
   },
 
   circles = {
@@ -128,6 +142,30 @@ M.icons = {
     three_quarter = "◕",
     full = "◉",
   },
+
+  lsp = {
+    css = " ",
+    dart = " ",
+    eslint = "󰱺 ",
+    html = " ",
+    javascript = "󰬷 ",
+    flutter = "󱗆 ",
+    lua = " ",
+    null_ls = " ",
+    python = " ",
+    swift = " ",
+    typescript = " ",
+  },
+}
+
+M.lsp_groups = {
+  dartls = M.icons.lsp.dart,
+  eslint = M.icons.lsp.eslint,
+  lua_ls = M.icons.lsp.lua,
+  tsserver = M.icons.lsp.typescript,
+  stylua = M.icons.lsp.lua,
+  pyright = M.icons.lsp.python,
+  ["null-ls"] = M.icons.lsp.null_ls,
 }
 
 M.vi_mode_config = {
@@ -228,6 +266,7 @@ function M.FuzzyTime()
 
   local hour_str = tostring(hour)
   if hour < 10 then hour_str = "0" .. hour_str end
+  -- local hour_str = M.icons.clocks[os.date "%H"]
 
   if min >= 7 and min < 23 then
     return hour_str .. ":" .. M.icons.circles.quarter
