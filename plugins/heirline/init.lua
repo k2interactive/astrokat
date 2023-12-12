@@ -7,6 +7,7 @@ return {
     local tabline = require "user.plugins.heirline.tabline"
     local status = require "astronvim.utils.status"
     local sc = require "user.plugins.heirline.statuscolumn"
+    local lsp = require "user.plugins.heirline.lsp-info"
 
     opts.opts = {
       disable_winbar_cb = function(args)
@@ -27,8 +28,10 @@ return {
       comp.cmd_info(),
       comp.fill(),
       custom.k2_extra_indicators(),
+      lsp.Lsp,
       diag.k2diag(),
       -- comp.lsp(),
+      custom.k2cwd(),
       custom.k2navigation(),
       custom.k2mode_r(),
     }

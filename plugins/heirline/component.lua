@@ -3,6 +3,7 @@ local M = {}
 local colors = require "user.plugins.heirline.colors"
 local colors_fallback = require("astronvim.utils.status.env").fallback_colors
 local comp = require "astronvim.utils.status.component"
+local conditions = require "heirline.conditions"
 local provider = require "astronvim.utils.status.provider"
 local get_hl = require("heirline.utils").get_highlight
 local status = require "astronvim.utils.status"
@@ -15,6 +16,7 @@ local priority = {
   Diagnostics = 50,
   FileName = 60,
   FilePath = 40,
+  Lsp = 35,
   Git = 20,
   Mode = 10,
   Navigation = 30,
@@ -191,20 +193,6 @@ function M.k2file_path()
     {
       provider = function()
         local cwd = vim.api.nvim_buf_get_name(0)
-        return subPath(path.home(cwd))
-      end,
-      hl = function() return {} end,
-    },
-    {
-      provider = function()
-        local cwd = vim.api.nvim_buf_get_name(0)
-        return subPath(path.home_s(cwd))
-      end,
-      hl = function() return {} end,
-    },
-    {
-      provider = function()
-        local cwd = vim.api.nvim_buf_get_name(0)
         return subPath(path.relative(cwd))
       end,
       hl = function() return {} end,
@@ -231,6 +219,36 @@ function M.k2file_info()
     file_icon = {},
     filename = {},
     file_modified = {},
+  }
+end
+
+function M.k2cwd()
+  return {
+    flexible = priority.CWD,
+    {
+      M.k2color_text {
+        text = icons.powerline.left_rounded,
+        fg = colors.segment2,
+        bg = colors.segment3,
+      },
+      {
+        provider = function()
+          local icon = icons.Folder2
+          local cwd = vim.fn.getcwd(0)
+          cwd = vim.fn.fnamemodify(cwd, ":~:t")
+          if not conditions.width_percent_below(#cwd, 0.25) then cwd = vim.fn.pathshorten(cwd) end
+          return icon .. cwd
+        end,
+        hl = { bg = colors.segment2, fg = colors.mid_text },
+      },
+    },
+    {
+      M.k2color_text {
+        text = icons.powerline.left_rounded,
+        fg = colors.segment2,
+        bg = colors.segment3,
+      },
+    },
   }
 end
 
