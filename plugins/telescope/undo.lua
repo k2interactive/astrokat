@@ -1,12 +1,13 @@
 return {
   {
-    use_delta = true,
+    side_by_side = false,
     layout_strategy = "vertical",
     layout_config = {
-      preview_height = 0.95,
+      preview_height = 0.75,
+      preview_cutoff = 20,
     },
+    use_delta = true,
     use_custom_command = nil, -- setting this implies `use_delta = false`. Accepted format is: { "bash", "-c", "echo '$DIFF' | delta" }
-    side_by_side = true,
     diff_context_lines = vim.o.scrolloff,
     entry_format = "state #$ID, $STAT, $TIME",
     time_format = "",
