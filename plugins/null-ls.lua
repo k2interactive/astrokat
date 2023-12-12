@@ -10,8 +10,15 @@ return {
     config.sources = {
       -- Set a formatter
       -- null_ls.builtins.formatting.stylua,
-      -- null_ls.builtins.formatting.prettier,
+      null_ls.builtins.formatting.black.with {
+        extra_args = { "--line-length=88" },
+      },
+      null_ls.builtins.formatting.isort,
       null_ls.builtins.diagnostics.mypy,
+      null_ls.builtins.completion.spell.with {
+        -- Force the severity to be HINT
+        diagnostics_postprocess = function(diagnostic) diagnostic.severity = vim.diagnostic.severity.HINT end,
+      },
     }
     return config -- return final config table
   end,
