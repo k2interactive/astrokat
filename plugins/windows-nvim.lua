@@ -42,7 +42,7 @@ return {
     animation = {
       enable = true,
       duration = 150,
-      fps = 30,
+      fps = 60,
       easing = "in_out_sine",
     },
   },
