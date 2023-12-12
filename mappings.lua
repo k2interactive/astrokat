@@ -3,7 +3,7 @@ local is_available = require("astronvim.utils").is_available
 -- mappings here will show in whichkey
 return {
   n = {
-    ["<leader>v"] = { name = "ENVironments" },
+    ["<leader>v"] = { name = " ENVironments" },
     ---------------------------------------------------------------------------
     -- disable Astro Defaults -------------------------------------------------
     ---------------------------------------------------------------------------
@@ -101,7 +101,8 @@ return {
       desc = "Open Diffview-Nvim",
       silent = true,
     },
-    ["<leader>gg"] = { "<cmd>lua require'lazygit'.lazygit()<cr>", desc = "LazyGit", silent = true },
+    -- ["<leader>gg"] = { "<cmd>lua require'lazygit'.lazygit()<cr>", desc = "LazyGit", silent = true },
+    ["<leader>gg"] = { function() require("lazygit").lazygit() end, desc = "LazyGit", silent = true },
 
     ---------------------------------------------------------------------------
     -- UI & Visuals -----------------------------------------------------------
@@ -109,7 +110,7 @@ return {
 
     --- Noice, Messaging & Logs ---
     -- TODO: Discuss messaging menu
-    ["<leader>m"] = { name = "Messaging" },
+    ["<leader>m"] = { name = " Messaging" },
     ["<leader>mr"] = { "<cmd>messages<cr>", silent = true, desc = "Raw Messages" },
     ["<leader>mp"] = { "<cmd>Noice<cr>", silent = true, desc = "Pretty Messages" },
     ["<leader>mh"] = { "<cmd>NoiceHistory<cr>", silent = true, desc = "Message History" },
@@ -131,7 +132,7 @@ return {
     ["<F6>"] = { function() require("zen-mode").toggle {} end, silent = true, desc = "Toggle ZenMode" },
     -- keys = { { "<leader>uT", "<cmd>Twilight<cr>", desc = "Toggle Twilight" } },
 
-    ["<leader>t"] = { name = "Tab Control" },
+    ["<leader>t"] = { name = "󰓩 Tab Control" },
     ["<leader>tc"] = { function() vim.cmd.tabclose() end, desc = "Close tab" },
     ["<leader>tn"] = { function() vim.cmd.tabnew() end, desc = "Open new tab" },
     ["<leader>t]"] = { function() vim.cmd.tabnext() end, desc = "Next Tab" },
@@ -146,7 +147,7 @@ return {
     ---------------------------------------------------------------------------
     -- Buffer -----------------------------------------------------------------
     ---------------------------------------------------------------------------
-    ["<leader>b"] = { name = "Buffers" },
+    ["<leader>b"] = { name = "󰮰 Buffers" },
 
     ["<tab>"] = { "<cmd>bnext<cr>", silent = true, desc = "Next Buffer" },
     ["<S-tab>"] = { "<cmd>bprev<cr>", silent = true, desc = "Previous Buffer" },
@@ -218,7 +219,7 @@ return {
     -- { prefix .. "m", "<cmd>Telescope harpoon marks<CR>", desc = "Show marks in Telescope" },
 
     -- using :tcd instead of :cd allows for separate tabs to have seperate Working directories
-    ["<leader>E"] = { name = "Explore to..." },
+    ["<leader>E"] = { name = " Explore to..." },
     ["<leader>EE"] = { "<cmd>tcd ~/<cr>", desc = "Home", silent = true },
     ["<leader>EA"] = { "<cmd>tcd ~/.config/Astro/lua/<cr>", desc = "Astro Config", silent = true },
     ["<leader>EK"] = { "<cmd>tcd ~/k2init/<cr>", desc = "k2init", silent = true },
@@ -245,16 +246,17 @@ return {
 
     ["<leader>u-"] = { "<cmd>WindowsMimimize<cr>", desc = "Minimize current window" },
 
-    -- TODO: add function to this for ui message of toggle state
-    ["<leader>um"] = { "<cmd>WindowsToggleAutowidth<cr>", desc = "Toggle window sizing" },
+    ["<leader>um"] = { function() require("user.tools").toggle_window_auto_resize() end, desc = "Toggle window sizing" },
     ["<F2>"] = { "<cmd>WindowsToggleAutowidth<cr>", desc = "Toggle window sizing" },
 
     ["n"] = { "nzz", desc = "Next search and center" },
     ["N"] = { "Nzz", desc = "Prev search and center" },
     ["<A-m>"] = { "/MARK<cr>", desc = "Mark Search" },
 
-    ["<Right>"] = { "$", noremap = true, desc = "Alt end of line" },
-    ["<Left>"] = { "_", noremap = true, desc = "Alt Beginning of line (First non-whitespace character)" },
+    -- ["<Right>"] = { "$", noremap = true, desc = "Alt end of line" },
+    -- ["<Left>"] = { "_", noremap = true, desc = "Alt Beginning of line (First non-whitespace character)" },
+    ["<Left>"] = { "ge", noremap = true, desc = "Move back" },
+    ["<Right>"] = { "w", noremap = true, desc = "Move forward" },
   },
   -----------------------------------------------------------------------------
   -- MARK: Visual Mode --------------------------------------------------------
@@ -330,7 +332,7 @@ return {
     ["<F2>"] = { "<cmd>WindowsToggleAutowidth<cr>", desc = "Toggle window sizing" },
   },
   -----------------------------------------------------------------------------
-  -- MARK: Terminal Mode -------------------------------------------------------
+  -- MARK: Terminal Mode ------------------------------------------------------
   -----------------------------------------------------------------------------
   t = {},
   -----------------------------------------------------------------------------
@@ -349,5 +351,8 @@ return {
     ["]<space>"] = { "mzo<ESC>`z", desc = "Blank line below" },
     ["[<space>"] = { "mzO<ESC>`z", desc = "Blank line above" },
     ["=<space>"] = { "mzO<ESC>`zo<ESC>`z", desc = "Blank line above and below" },
+  },
+  c = {
+    ["<S-Enter>"] = { function() require("noice").redirect(vim.fn.getcmdline()) end },
   },
 }
