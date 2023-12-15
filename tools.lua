@@ -2,6 +2,18 @@ local M = {}
 
 local get_hl = require("heirline.utils").get_highlight
 
+function M.toggle_window_auto_resize()
+  if vim.g.window_size_enable_auto_true then
+    vim.cmd "WindowsDisableAutowidth"
+    vim.g.window_size_enable_auto_true = false
+    vim.notify("Window auto resizing off", vim.log.levels.INFO)
+  else
+    vim.cmd "WindowsEnableAutowidth"
+    vim.g.window_size_enable_auto_true = true
+    vim.notify("Window auto resizing on", vim.log.levels.INFO)
+  end
+end
+
 function M.toggle_diffview()
   local lib = require "diffview.lib"
   local view = lib.get_current_view()
@@ -9,7 +21,7 @@ function M.toggle_diffview()
   if view then
     -- Diffview present
     vim.cmd "DiffviewClose"
-    vim.cmd "WindowsEnableAutoWidth"
+    if vim.g.window_size_enable_auto_true then vim.cmd "WindowsEnableAutowidth" end
   else
     vim.cmd "WindowsDisableAutowidth"
     vim.cmd "DiffviewOpen"
