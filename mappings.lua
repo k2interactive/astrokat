@@ -193,7 +193,6 @@ return {
     ["<leader>P"] = { [["0P]], desc = "Stable Paste Before" },
 
     ["Y"] = { "mm_y$`m", desc = "Yank line w/o NL character" },
-    ["D"] = { "_d$", desc = "Clear chars in line (remaps from duplicate of d$)" },
     ["D"] = { "0d$", desc = "Clear chars in line (remaps from duplicate of d$)" },
 
     ["dd"] = {
