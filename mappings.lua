@@ -81,7 +81,7 @@ return {
       desc = "Toggle Explorer Focus",
     },
 
-    ["<leader>fz"] = { "<cmd>Telescope zoxide list<CR>", silent = true, desc = "Find directories" },
+    ["<leader>fd"] = { "<cmd>Telescope zoxide list<CR>", silent = true, desc = "Find directories" },
 
     ---------------------------------------------------------------------------
     -- Project Control --------------------------------------------------------
@@ -117,7 +117,8 @@ return {
       desc = "Open Diffview-Nvim",
       silent = true,
     },
-    ["<leader>gg"] = { "<cmd>lua require'lazygit'.lazygit()<cr>", desc = "LazyGit", silent = true },
+
+    ["<leader>gg"] = { function() require("lazygit").lazygit() end, desc = "LazyGit", silent = true },
 
     ---------------------------------------------------------------------------
     -- UI & Visuals -----------------------------------------------------------
@@ -193,6 +194,7 @@ return {
 
     ["Y"] = { "mm_y$`m", desc = "Yank line w/o NL character" },
     ["D"] = { "_d$", desc = "Clear chars in line (remaps from duplicate of d$)" },
+    ["D"] = { "0d$", desc = "Clear chars in line (remaps from duplicate of d$)" },
 
     ["dd"] = {
       function()
@@ -262,8 +264,7 @@ return {
 
     ["<leader>u-"] = { "<cmd>WindowsMimimize<cr>", desc = "Minimize current window" },
 
-    -- TODO: add function to this for ui message of toggle state
-    ["<leader>um"] = { "<cmd>WindowsToggleAutowidth<cr>", desc = "Toggle window sizing" },
+    ["<leader>um"] = { function() require("user.tools").toggle_window_auto_resize() end, desc = "Toggle window sizing" },
     ["<F2>"] = { "<cmd>WindowsToggleAutowidth<cr>", desc = "Toggle window sizing" },
 
     ["n"] = { "nzz", desc = "Next search and center" },
@@ -353,7 +354,7 @@ return {
     ["<F2>"] = { "<cmd>WindowsToggleAutowidth<cr>", desc = "Toggle window sizing" },
   },
   -----------------------------------------------------------------------------
-  -- MARK: Terminal Mode -------------------------------------------------------
+  -- MARK: Terminal Mode ------------------------------------------------------
   -----------------------------------------------------------------------------
   t = {},
   -----------------------------------------------------------------------------
