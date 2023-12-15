@@ -6,16 +6,21 @@ return { -- a table of overrides/changes to the duskfox theme
   Comment = { fg = "#605560", italic = true },
   DiffRemove = { bg = "#6F3254" },
   NotifyBackground = { bg = "#0b081d" },
+  Visual = { fg = "#dddddd", bg = "#004e53" },
+
   HopNextKey = { fg = "#00ff00" },
   HopNextKey1 = { fg = "#00ff00" },
   HopNextKey2 = { fg = "#00ff00" },
   Visual = { fg = "#dddddd", bg = "#004e53" },
+
   DiffAdd = { fg = "#3344ff", bg = "#000000" }, -- diffview-nvim - <<<<<<, HEAD, and simalar
   DiffDelete = { fg = "#ee0000", bg = "#000000" }, -- diffview-nvim - Deleted Chars
   DiffChange = { fg = "#00ff00", bg = "#000000" }, -- diffview-nvim - Changed chars
+
   diffAdded = { fg = "#ffffff", bg = "#1122cc" }, -- for neovim-undotree
   diffChanged = { fg = "#ffffff", bg = "#00ee00" }, -- for neovim-undotree
   diffRemoved = { fg = "#ffffff", bg = "#cc0000" }, -- for neovim-undotree
+
   -- Folded = { fg = "#241324", bg = "#050511" },
   Folded = { fg = "#00ff00", bg = "#110011" },
   -- DiagnosticSignInactive = { fg = "#504550" },
@@ -39,10 +44,6 @@ return { -- a table of overrides/changes to the duskfox theme
   TabLine = { bg = "#64449a", fg = "#111111" },
   TabLineFill = { bg = get_hl("Keyword").bg, fg = "#7454aa" },
   MoreMsg = { fg = get_hl("Keyword").fg },
-
-  -- ["LspReferenceText"] = { bg = "#0000ff" },
-  -- ["LspReferenceRead"] = { bg = "#ff00ff" },
-  -- ["LspReferenceWrite"] = { bg = "#0ff0ff" },
 
   LspReferenceRead = { underline = true },
   LspReferenceWrite = { underline = true },

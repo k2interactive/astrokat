@@ -12,7 +12,7 @@ return {
       },
       {
         "S",
-        function() require("hop").hint_lines() end,
+        function() require("hop").hint_lines {} end,
         mode = { "n" },
         desc = "Hop hint lines",
       },

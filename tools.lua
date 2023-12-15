@@ -80,7 +80,7 @@ M.icons = {
     column_number = "",
   },
   padlock = "",
-  circle_small = " ● ", -- ●
+  circle_small = " ●", -- ●
   circle = "", -- 
   circle_plus = "", -- 
   dot_circle_o = "", -- 

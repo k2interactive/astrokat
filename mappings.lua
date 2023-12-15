@@ -20,8 +20,16 @@ return {
     ["<leader>bn"] = false,
     ["<leader>bp"] = false,
 
+    ["<leader>S"] = false,
+    ["<leader>Sl"] = false,
+    ["<leader>Ss"] = false,
+    ["<leader>Sd"] = false,
+    ["<leader>Sf"] = false,
+    ["<leader>S."] = false,
+
     --
     -- MARK: PROJECT TEMP MAPPINGS
+
     -- PROJECT TEMP END
 
     ["<leader>u/"] = {
@@ -53,30 +61,38 @@ return {
 
     ["<leader>Q"] = { "<cmd>quitall<cr>", desc = "Quit All (preserves splits etc.)" },
 
+    ["<leader>a"] = { "ggVG", desc = "Seeelect All" },
+
     ["<leader>e"] = { ":Neotree toggle float<cr>", silent = true, desc = "Toggle Explorer" },
     ["<F4>"] = { function() require("ranger-nvim").open(true) end, noremap = true, desc = "Ranger rides again!" },
     ["<F5>"] = { function() require("luapad").toggle {} end, noremap = true, desc = "Toggle Luapad" },
-    ["<leader>0"] = { ":Neotree toggle left<cr>", silent = true, desc = "Toggle Explorer" },
-    ["<leader>o"] = { function() require("aerial").toggle() end, desc = "Symbols outline" },
+    ["<leader>0"] = { ":Neotree toggle right<cr>", silent = true, desc = "Toggle Explorer" },
+    ["<leader>o"] = { function() require("aerial").toggle { direction = "left" } end, desc = "Symbols outline" },
 
-    -- TODO: function exploration
-    -- originally remap of explorer toggle
-    -- ["<leader>0"] = {
-    --   function()
-    --     if vim.bo.filetype == "neo-tree" then
-    --       vim.cmd.wincmd "p"
-    --     else
-    --       vim.cmd.Neotree "focus"
-    --     end
-    --   end,
-    --   desc = "Toggle Explorer Focus",
-    -- },
+    -- ie. <leader><S-0> --
+    ["<leader>)"] = {
+      function()
+        if vim.bo.filetype == "neo-tree" then
+          vim.cmd.wincmd "p"
+        else
+          vim.cmd.Neotree "focus"
+        end
+      end,
+      desc = "Toggle Explorer Focus",
+    },
 
-    ["<leader>fz"] = { "<cmd>Telescope zoxide list<CR>", silent = true, desc = "Find directories" },
+    ["<leader>fd"] = { "<cmd>Telescope zoxide list<CR>", silent = true, desc = "Find directories" },
 
     ---------------------------------------------------------------------------
     -- Project Control --------------------------------------------------------
     ---------------------------------------------------------------------------
+
+    ["<leader>s"] = { name = " Session" },
+    ["<leader>sl"] = { "<cmd>SessionManager! load_last_session<cr>", desc = "Load last session" },
+    ["<leader>ss"] = { "<cmd>SessionManager! save_current_session<cr>", desc = "Save this session" },
+    ["<leader>sd"] = { "<cmd>SessionManager! delete_session<cr>", desc = "Delete session" },
+    ["<leader>sf"] = { "<cmd>SessionManager! load_session<cr>", desc = "Search sessions" },
+    ["<leader>s."] = { "<cmd>SessionManager! load_current_dir_session<cr>", desc = "Load cwd session" },
     ["<leader>fp"] = { "<cmd>Telescope projects<cr>", silent = true, desc = "Search Projects.nvim" },
 
     ["<leader>fs"] = {
@@ -101,7 +117,6 @@ return {
       desc = "Open Diffview-Nvim",
       silent = true,
     },
-    -- ["<leader>gg"] = { "<cmd>lua require'lazygit'.lazygit()<cr>", desc = "LazyGit", silent = true },
     ["<leader>gg"] = { function() require("lazygit").lazygit() end, desc = "LazyGit", silent = true },
 
     ---------------------------------------------------------------------------
@@ -177,7 +192,7 @@ return {
     ["<leader>P"] = { [["0P]], desc = "Stable Paste Before" },
 
     ["Y"] = { "mm_y$`m", desc = "Yank line w/o NL character" },
-    ["D"] = { "_d$", desc = "Clear chars in line (remaps from duplicate of d$)" },
+    ["D"] = { "0d$", desc = "Clear chars in line (remaps from duplicate of d$)" },
 
     ["dd"] = {
       function()
@@ -210,6 +225,7 @@ return {
 
     -- -------------------
     -- From harpoon.lua --
+    -- prefix = <leader><leader>
     -- { prefix .. "a", function() require("harpoon.mark").add_file() end, desc = "Add file" },
     -- { prefix .. "e", function() require("harpoon.ui").toggle_quick_menu() end, desc = "Toggle quick menu" },
 
@@ -253,10 +269,11 @@ return {
     ["N"] = { "Nzz", desc = "Prev search and center" },
     ["<A-m>"] = { "/MARK<cr>", desc = "Mark Search" },
 
-    -- ["<Right>"] = { "$", noremap = true, desc = "Alt end of line" },
-    -- ["<Left>"] = { "_", noremap = true, desc = "Alt Beginning of line (First non-whitespace character)" },
-    ["<Left>"] = { "ge", noremap = true, desc = "Move back" },
-    ["<Right>"] = { "w", noremap = true, desc = "Move forward" },
+    -- Cursor word Navigation
+    ["<Left>"] = { "b", noremap = true, desc = "Prev Word Begin" },
+    ["<S-Left>"] = { "ge", noremap = true, desc = "Prev Word End" },
+    ["<Right>"] = { "w", noremap = true, desc = "Next Word Begin" },
+    ["<S-Right>"] = { "e", noremap = true, desc = "Next Word End" },
   },
   -----------------------------------------------------------------------------
   -- MARK: Visual Mode --------------------------------------------------------
@@ -265,15 +282,18 @@ return {
 
     [";"] = { ":", desc = "Command Alt" },
 
-    ["<leader>0"] = { function() require("ranger-nvim").open(true) end, noremap = true, desc = "Ranger rides again!" },
-    ["<leader>o"] = { function() require("aerial").toggle() end, desc = "Symbols outline" },
+    ["<leader>0"] = { ":Neotree toggle right<cr>", silent = true, desc = "Toggle Explorer" },
+    ["<leader>o"] = { function() require("aerial").toggle { direction = "left" } end, desc = "Symbols outline" },
+
     ["<F4>"] = { function() require("ranger-nvim").open(true) end, noremap = true, desc = "Ranger rides again!" },
 
     ["x"] = { [["_d]], desc = "Delete to black hole register" },
 
     -- Movement Enhancements
-    ["<Right>"] = { "<End>", desc = "Alt end of line" },
-    ["<Left>"] = { "_", desc = "Alt Beginning of line (First non-whitespace character)" },
+    ["<Left>"] = { "b", noremap = true, desc = "Alt Beginning of line (First non-whitespace)" },
+    ["<S-Left>"] = { "ge", noremap = true, desc = "Alt Beginning of line (First non-whitespace)" },
+    ["<Right>"] = { "w", noremap = true, desc = "Alt end of line" },
+    ["<S-Right>"] = { "e", noremap = true, desc = "Alt end of line" },
 
     -- Push lines
     ["<A-j>"] = { ":m '>+1<CR>gv=gv", desc = "Move Line Down", silent = true },
@@ -345,8 +365,11 @@ return {
     -- ["<Right>"] = { "$", noremap = true, desc = "Alt end of line" },
   },
   o = {
-    ["<Right>"] = { "$", noremap = true, desc = "Alt end of line" },
-    ["<Left>"] = { "_", noremap = true, desc = "Alt Beginning of line (First non-whitespace)" },
+    -- Cursor word Navigation
+    ["<Left>"] = { "b", noremap = true, desc = "Prev Word Begin" },
+    ["<S-Left>"] = { "ge", noremap = true, desc = "Prev Word End" },
+    ["<Right>"] = { "w", noremap = true, desc = "Next Word Begin" },
+    ["<S-Right>"] = { "e", noremap = true, desc = "Next Word End" },
 
     ["]<space>"] = { "mzo<ESC>`z", desc = "Blank line below" },
     ["[<space>"] = { "mzO<ESC>`z", desc = "Blank line above" },
