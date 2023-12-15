@@ -66,21 +66,20 @@ return {
     ["<leader>e"] = { ":Neotree toggle float<cr>", silent = true, desc = "Toggle Explorer" },
     ["<F4>"] = { function() require("ranger-nvim").open(true) end, noremap = true, desc = "Ranger rides again!" },
     ["<F5>"] = { function() require("luapad").toggle {} end, noremap = true, desc = "Toggle Luapad" },
-    ["<leader>0"] = { ":Neotree toggle left<cr>", silent = true, desc = "Toggle Explorer" },
-    ["<leader>o"] = { function() require("aerial").toggle() end, desc = "Symbols outline" },
+    ["<leader>0"] = { ":Neotree toggle right<cr>", silent = true, desc = "Toggle Explorer" },
+    ["<leader>o"] = { function() require("aerial").toggle { direction = "left" } end, desc = "Symbols outline" },
 
-    -- TODO: function exploration
-    -- originally remap of explorer toggle
-    -- ["<leader>0"] = {
-    --   function()
-    --     if vim.bo.filetype == "neo-tree" then
-    --       vim.cmd.wincmd "p"
-    --     else
-    --       vim.cmd.Neotree "focus"
-    --     end
-    --   end,
-    --   desc = "Toggle Explorer Focus",
-    -- },
+    -- ie. <leader><S-0> --
+    ["<leader>)"] = {
+      function()
+        if vim.bo.filetype == "neo-tree" then
+          vim.cmd.wincmd "p"
+        else
+          vim.cmd.Neotree "focus"
+        end
+      end,
+      desc = "Toggle Explorer Focus",
+    },
 
     ["<leader>fz"] = { "<cmd>Telescope zoxide list<CR>", silent = true, desc = "Find directories" },
 
@@ -281,8 +280,9 @@ return {
 
     [";"] = { ":", desc = "Command Alt" },
 
-    ["<leader>0"] = { function() require("ranger-nvim").open(true) end, noremap = true, desc = "Ranger rides again!" },
-    ["<leader>o"] = { function() require("aerial").toggle() end, desc = "Symbols outline" },
+    ["<leader>0"] = { ":Neotree toggle right<cr>", silent = true, desc = "Toggle Explorer" },
+    ["<leader>o"] = { function() require("aerial").toggle { direction = "left" } end, desc = "Symbols outline" },
+
     ["<F4>"] = { function() require("ranger-nvim").open(true) end, noremap = true, desc = "Ranger rides again!" },
 
     ["x"] = { [["_d]], desc = "Delete to black hole register" },
