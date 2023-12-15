@@ -128,6 +128,30 @@ M.icons = {
     three_quarter = "◕",
     full = "◉",
   },
+
+  lsp = {
+    css = " ",
+    dart = " ",
+    eslint = "󰱺 ",
+    html = " ",
+    javascript = "󰬷 ",
+    flutter = "󱗆 ",
+    lua = " ",
+    null_ls = " ",
+    python = " ",
+    swift = " ",
+    typescript = " ",
+  },
+}
+
+M.lsp_groups = {
+  dartls = M.icons.lsp.dart,
+  eslint = M.icons.lsp.eslint,
+  lua_ls = M.icons.lsp.lua,
+  tsserver = M.icons.lsp.typescript,
+  stylua = M.icons.lsp.lua,
+  pyright = M.icons.lsp.python,
+  ["null-ls"] = M.icons.lsp.null_ls,
 }
 
 M.vi_mode_config = {

@@ -69,6 +69,10 @@ return {
       -- end,
     },
     config = {
+      dartls = {
+        color = { enabled = true },
+        settings = { showTodos = true, completeFunctionCalls = true },
+      },
       lua_ls = {
         settings = {
           Lua = { workspace = { checkThirdParty = "Disable" } },
@@ -77,7 +81,11 @@ return {
     },
     -- enable servers that you already have installed without mason
     servers = {
+      "dartls",
       -- "pyright"
+    },
+    setup_handlers = {
+      dartls = function(_, opts) require("flutter-tools").setup { lsp = opts } end,
     },
   },
 
