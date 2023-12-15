@@ -20,6 +20,7 @@ return {
       "i-ci:ver25-Cursor/lCursor-blinkwait100-blinkon10-blinkoff10",
       "r:hor50-Cursor/lCursor-blinkwait10-blinkon10-blinkoff10",
     },
+    spelllang = "en_us", -- spelling language
   },
   g = {
     mapleader = " ", -- sets vim.g.mapleader
