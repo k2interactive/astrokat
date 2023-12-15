@@ -1,4 +1,4 @@
-local prefix = "<leader>a"
+local prefix = "<leader>A"
 local maps = { n = {} }
 local icon = vim.g.icons_enabled and "󰷉 " or ""
 maps.n[prefix] = { desc = icon .. "Annotation" }
