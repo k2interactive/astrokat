@@ -80,7 +80,7 @@ M.icons = {
     column_number = "",
   },
   padlock = "",
-  circle_small = " ● ", -- ●
+  circle_small = " ●", -- ●
   circle = "", -- 
   circle_plus = "", -- 
   dot_circle_o = "", -- 
@@ -88,6 +88,8 @@ M.icons = {
   ScrollText = "",
   VimIcon = " ",
   PathSeparator = "",
+  Folder1 = "󰉋",
+  Folder2 = " ",
 
   Moon1 = " ",
   Moon2 = "",
@@ -108,30 +110,30 @@ M.icons = {
   ]],
 
   clocks = {
-    midnight = "󱑊 ",
-    one = "󱐿 ",
-    two = "󱑀 ",
-    three = "󱑁 ",
-    four = "󱑂 ",
-    five = "󱑃 ",
-    six = "󱑄 ",
-    seven = "󱑑 ",
-    eight = "󱑒 ",
-    nine = "󱑎 ",
-    ten = "󱑔 ",
-    eleven = "󱑕 ",
-    tweleve = "󱑖 ",
-    thirteen = "󱑋 ",
-    fourteen = "󱑌 ",
-    fifteen = "󱑍 ",
-    sixteen = "󱑎 ",
-    seventeen = "󱑏 ",
-    eighteen = "󱑐 ",
-    nineteen = "󱑅 ",
-    twenty = "󱑆 ",
-    twentyOne = "󱑇 ",
-    twentyTwo = "󱑈 ",
-    twentyThree = "󱑉 ",
+    ["00"] = "󱑊 ",
+    ["01"] = "󱐿 ",
+    ["02"] = "󱑀 ",
+    ["03"] = "󱑁 ",
+    ["04"] = "󱑂 ",
+    ["05"] = "󱑃 ",
+    ["06"] = "󱑄 ",
+    ["07"] = "󱑑 ",
+    ["08"] = "󱑒 ",
+    ["09"] = "󱑎 ",
+    ["10"] = "󱑔 ",
+    ["11"] = "󱑕 ",
+    ["12"] = "󱑖 ",
+    ["13"] = "󱑋 ",
+    ["14"] = "󱑌 ",
+    ["15"] = "󱑍 ",
+    ["16"] = "󱑎 ",
+    ["17"] = "󱑏 ",
+    ["18"] = "󱑐 ",
+    ["19"] = "󱑅 ",
+    ["20"] = "󱑆 ",
+    ["21"] = "󱑇 ",
+    ["22"] = "󱑈 ",
+    ["23"] = "󱑉 ",
   },
 
   circles = {
@@ -264,6 +266,7 @@ function M.FuzzyTime()
 
   local hour_str = tostring(hour)
   if hour < 10 then hour_str = "0" .. hour_str end
+  -- local hour_str = M.icons.clocks[os.date "%H"]
 
   if min >= 7 and min < 23 then
     return hour_str .. ":" .. M.icons.circles.quarter
