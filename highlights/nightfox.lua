@@ -1,28 +1,34 @@
 return { -- a table of overrides/changes to the duskfox theme
-  Normal = { bg = "NONE" },
-  NotifyBackground = { bg = "#0b0a1d" },
-  Comment = { fg = "#605560", italic = true },
-  CursorLine = { bg = "#201040" },
-  ColorColumn = { bg = "#0a071a" },
-  LineNr = { fg = "#313a5d" },
-  Visual = { bg = "#1d1b52" },
-  Folded = { fg = "#241324", bg = "#050511" },
-  VertSplit = { fg = "#775588", bg = "#482858" },
-  HopNextKey = { fg = "#00ff00" },
-  HopNextKey1 = { fg = "#00dd00" },
-  HopNextKey2 = { fg = "#00bb00" },
+  Number = { fg = "#22eeaa", bold = true },
+  CursorLine = { underline = true, sp = "#8d69e5" },
+  ["@field"] = { fg = "#b8a0ef", bold = false },
+  ["@keyword.function"] = { fg = "#a055dc", italic = true },
+  ["@keyword.return"] = { fg = "#c95e80", italic = true },
+  ["@variable"] = { fg = "#cccccc", bold = true },
+
+  NeoTreeCursorLine = { bold = true, underline = true, sp = "#8d69e5" },
+
   DiffAdd = { fg = "#3344ff", bg = "#000000" }, -- diffview-nvim - <<<<<<, HEAD, and simalar
   DiffDelete = { fg = "#ee0000", bg = "#000000" }, -- diffview-nvim - Deleted Chars
   DiffChange = { fg = "#00ff00", bg = "#000000" }, -- diffview-nvim - Changed chars
+
   diffAdded = { fg = "#dddddd", bg = "#1122cc" }, -- for neovim-undotree
   diffChanged = { fg = "#dddddd", bg = "#00aa00" }, -- for neovim-undotree
   diffRemoved = { fg = "#dddddd", bg = "#bb0000" }, -- for neovim-undotree
+
   DiagnosticSignError = { fg = "#605560" },
-  DiagnosticSignWarn = { fg = "#605560" },
-  DiagnosticSignInfo = { fg = "#605560" },
-  DiagnosticSignHint = { fg = "#605560" },
+
   HighlightUndo = { fg = "#dddddd", bg = "#ee0000" },
   HighlightRedo = { fg = "#dddddd", bg = "#00bb00" },
+  TabLineSel = { bg = "#9d79f5", fg = "#000000" },
+  TabLine = { bg = "#64449a", fg = "#111111" },
+  TabLineFill = { bg = "#000000", fg = "#7454aa" },
+  MoreMsg = { fg = "#9d79f5" },
+
+  LspReferenceRead = { underline = true },
+  LspReferenceWrite = { underline = true },
+  LspReferenceText = { underline = true },
+
   -- DiffRemove          = { fg = "#000000", bg = "#dddddd" }, -- },--6f3254" },--{ fg = spec.git.removed },-- Removed lines ("^-.*" | "^<.*")
   -- DiffText            = { fg = "#000000", bg = "#dddddd" }, -- ???
   -- DiffviewDim1        = { fg = "#000000", bg = "#dddddd" },
