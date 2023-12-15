@@ -270,8 +270,11 @@ return {
     ["N"] = { "Nzz", desc = "Prev search and center" },
     ["<A-m>"] = { "/MARK<cr>", desc = "Mark Search" },
 
-    ["<Right>"] = { "$", noremap = true, desc = "Alt end of line" },
-    ["<Left>"] = { "_", noremap = true, desc = "Alt Beginning of line (First non-whitespace character)" },
+    -- Cursor word Navigation
+    ["<Left>"] = { "b", noremap = true, desc = "Prev Word Begin" },
+    ["<S-Left>"] = { "ge", noremap = true, desc = "Prev Word End" },
+    ["<Right>"] = { "w", noremap = true, desc = "Next Word Begin" },
+    ["<S-Right>"] = { "e", noremap = true, desc = "Next Word End" },
   },
   -----------------------------------------------------------------------------
   -- MARK: Visual Mode --------------------------------------------------------
@@ -288,8 +291,10 @@ return {
     ["x"] = { [["_d]], desc = "Delete to black hole register" },
 
     -- Movement Enhancements
-    ["<Right>"] = { "<End>", desc = "Alt end of line" },
-    ["<Left>"] = { "_", desc = "Alt Beginning of line (First non-whitespace character)" },
+    ["<Left>"] = { "b", noremap = true, desc = "Alt Beginning of line (First non-whitespace)" },
+    ["<S-Left>"] = { "ge", noremap = true, desc = "Alt Beginning of line (First non-whitespace)" },
+    ["<Right>"] = { "w", noremap = true, desc = "Alt end of line" },
+    ["<S-Right>"] = { "e", noremap = true, desc = "Alt end of line" },
 
     -- Push lines
     ["<A-j>"] = { ":m '>+1<CR>gv=gv", desc = "Move Line Down", silent = true },
@@ -361,8 +366,11 @@ return {
     -- ["<Right>"] = { "$", noremap = true, desc = "Alt end of line" },
   },
   o = {
-    ["<Right>"] = { "$", noremap = true, desc = "Alt end of line" },
-    ["<Left>"] = { "_", noremap = true, desc = "Alt Beginning of line (First non-whitespace)" },
+    -- Cursor word Navigation
+    ["<Left>"] = { "b", noremap = true, desc = "Prev Word Begin" },
+    ["<S-Left>"] = { "ge", noremap = true, desc = "Prev Word End" },
+    ["<Right>"] = { "w", noremap = true, desc = "Next Word Begin" },
+    ["<S-Right>"] = { "e", noremap = true, desc = "Next Word End" },
 
     ["]<space>"] = { "mzo<ESC>`z", desc = "Blank line below" },
     ["[<space>"] = { "mzO<ESC>`z", desc = "Blank line above" },
