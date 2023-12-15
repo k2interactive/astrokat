@@ -376,4 +376,7 @@ return {
     ["[<space>"] = { "mzO<ESC>`z", desc = "Blank line above" },
     ["=<space>"] = { "mzO<ESC>`zo<ESC>`z", desc = "Blank line above and below" },
   },
+  c = {
+    ["<S-Enter>"] = { function() require("noice").redirect(vim.fn.getcmdline()) end },
+  },
 }
