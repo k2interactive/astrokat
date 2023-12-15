@@ -117,6 +117,7 @@ return {
     --   },
     -- }
 
+    vim.api.nvim_set_var("window_size_enable_auto_true", true)
     require("telescope").load_extension "hop"
   end,
 
