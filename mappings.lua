@@ -20,6 +20,13 @@ return {
     ["<leader>bn"] = false,
     ["<leader>bp"] = false,
 
+    ["<leader>S"] = false,
+    ["<leader>Sl"] = false,
+    ["<leader>Ss"] = false,
+    ["<leader>Sd"] = false,
+    ["<leader>Sf"] = false,
+    ["<leader>S."] = false,
+
     --
     -- MARK: PROJECT TEMP MAPPINGS
 
@@ -54,6 +61,8 @@ return {
 
     ["<leader>Q"] = { "<cmd>quitall<cr>", desc = "Quit All (preserves splits etc.)" },
 
+    ["<leader>a"] = { "ggVG", desc = "Seeelect All" },
+
     ["<leader>e"] = { ":Neotree toggle float<cr>", silent = true, desc = "Toggle Explorer" },
     ["<F4>"] = { function() require("ranger-nvim").open(true) end, noremap = true, desc = "Ranger rides again!" },
     ["<F5>"] = { function() require("luapad").toggle {} end, noremap = true, desc = "Toggle Luapad" },
@@ -78,6 +87,13 @@ return {
     ---------------------------------------------------------------------------
     -- Project Control --------------------------------------------------------
     ---------------------------------------------------------------------------
+
+    ["<leader>s"] = { name = " Session" },
+    ["<leader>sl"] = { "<cmd>SessionManager! load_last_session<cr>", desc = "Load last session" },
+    ["<leader>ss"] = { "<cmd>SessionManager! save_current_session<cr>", desc = "Save this session" },
+    ["<leader>sd"] = { "<cmd>SessionManager! delete_session<cr>", desc = "Delete session" },
+    ["<leader>sf"] = { "<cmd>SessionManager! load_session<cr>", desc = "Search sessions" },
+    ["<leader>s."] = { "<cmd>SessionManager! load_current_dir_session<cr>", desc = "Load cwd session" },
     ["<leader>fp"] = { "<cmd>Telescope projects<cr>", silent = true, desc = "Search Projects.nvim" },
 
     ["<leader>fs"] = {
