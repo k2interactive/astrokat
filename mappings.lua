@@ -3,7 +3,7 @@ local is_available = require("astronvim.utils").is_available
 -- mappings here will show in whichkey
 return {
   n = {
-    ["<leader>v"] = { name = "ENVironments" },
+    ["<leader>v"] = { name = " ENVironments" },
     ---------------------------------------------------------------------------
     -- disable Astro Defaults -------------------------------------------------
     ---------------------------------------------------------------------------
@@ -22,6 +22,7 @@ return {
 
     --
     -- MARK: PROJECT TEMP MAPPINGS
+
     -- PROJECT TEMP END
 
     ["<leader>u/"] = {
@@ -109,7 +110,7 @@ return {
 
     --- Noice, Messaging & Logs ---
     -- TODO: Discuss messaging menu
-    ["<leader>m"] = { name = "Messaging" },
+    ["<leader>m"] = { name = " Messaging" },
     ["<leader>mr"] = { "<cmd>messages<cr>", silent = true, desc = "Raw Messages" },
     ["<leader>mp"] = { "<cmd>Noice<cr>", silent = true, desc = "Pretty Messages" },
     ["<leader>mh"] = { "<cmd>NoiceHistory<cr>", silent = true, desc = "Message History" },
@@ -131,7 +132,7 @@ return {
     ["<F6>"] = { function() require("zen-mode").toggle {} end, silent = true, desc = "Toggle ZenMode" },
     -- keys = { { "<leader>uT", "<cmd>Twilight<cr>", desc = "Toggle Twilight" } },
 
-    ["<leader>t"] = { name = "Tab Control" },
+    ["<leader>t"] = { name = "󰓩 Tab Control" },
     ["<leader>tc"] = { function() vim.cmd.tabclose() end, desc = "Close tab" },
     ["<leader>tn"] = { function() vim.cmd.tabnew() end, desc = "Open new tab" },
     ["<leader>t]"] = { function() vim.cmd.tabnext() end, desc = "Next Tab" },
@@ -146,7 +147,7 @@ return {
     ---------------------------------------------------------------------------
     -- Buffer -----------------------------------------------------------------
     ---------------------------------------------------------------------------
-    ["<leader>b"] = { name = "Buffers" },
+    ["<leader>b"] = { name = "󰮰 Buffers" },
 
     ["<tab>"] = { "<cmd>bnext<cr>", silent = true, desc = "Next Buffer" },
     ["<S-tab>"] = { "<cmd>bprev<cr>", silent = true, desc = "Previous Buffer" },
@@ -209,6 +210,7 @@ return {
 
     -- -------------------
     -- From harpoon.lua --
+    -- prefix = <leader><leader>
     -- { prefix .. "a", function() require("harpoon.mark").add_file() end, desc = "Add file" },
     -- { prefix .. "e", function() require("harpoon.ui").toggle_quick_menu() end, desc = "Toggle quick menu" },
 
@@ -218,7 +220,7 @@ return {
     -- { prefix .. "m", "<cmd>Telescope harpoon marks<CR>", desc = "Show marks in Telescope" },
 
     -- using :tcd instead of :cd allows for separate tabs to have seperate Working directories
-    ["<leader>E"] = { name = "Explore to..." },
+    ["<leader>E"] = { name = " Explore to..." },
     ["<leader>EE"] = { "<cmd>tcd ~/<cr>", desc = "Home", silent = true },
     ["<leader>EA"] = { "<cmd>tcd ~/.config/Astro/lua/<cr>", desc = "Astro Config", silent = true },
     ["<leader>EK"] = { "<cmd>tcd ~/k2init/<cr>", desc = "k2init", silent = true },
