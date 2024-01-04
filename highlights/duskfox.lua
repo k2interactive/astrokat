@@ -1,6 +1,8 @@
 local get_hl = require("heirline.utils").get_highlight
 
 return { -- a table of overrides/changes to the duskfox theme
+  CursorLine = { underline = true, sp = "#8d69e5" },
+  NeoTreeCursorLine = { bold = true, underline = true, sp = "#8d69ef" },
   -- Normal = { bg = "#100510" },
   Normal = { bg = "NONE" },
   Comment = { fg = "#605560", italic = true },
@@ -11,7 +13,6 @@ return { -- a table of overrides/changes to the duskfox theme
   HopNextKey = { fg = "#00ff00" },
   HopNextKey1 = { fg = "#00ff00" },
   HopNextKey2 = { fg = "#00ff00" },
-  Visual = { fg = "#dddddd", bg = "#004e53" },
 
   DiffAdd = { fg = "#3344ff", bg = "#000000" }, -- diffview-nvim - <<<<<<, HEAD, and simalar
   DiffDelete = { fg = "#ee0000", bg = "#000000" }, -- diffview-nvim - Deleted Chars

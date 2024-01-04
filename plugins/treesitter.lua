@@ -42,4 +42,5 @@ return {
       },
     }
   end,
+      require("treesitter-context").setup {
 }
