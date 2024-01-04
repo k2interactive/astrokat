@@ -13,7 +13,7 @@ return {
         -- Set a formatter
         -- null_ls.builtins.formatting.stylua,
         -- null_ls.builtins.formatting.prettier,
-        null_ls.builtins.diagnostics.mypy,
+        -- null_ls.builtins.diagnostics.mypy,
       }
       return config -- return final config table
     end,
@@ -25,6 +25,18 @@ return {
       -- Your options go here
       -- name = "venv",
       -- auto_refresh = false
+      search_venv_managers = true,
+      search_workspace = false,
+      search = false,
+      dap_enabled = false,
+      poetry_path = false,
+      pdm_path = false,
+      pyenv_path = false,
+      hatch_path = false,
+      venvwrapper_path = false,
+      anaconda_base_path = false,
+      anaconda_envs_path = false,
+      enable_debug_output = true,
     },
     event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
     keys = {
@@ -51,6 +63,21 @@ return {
     config = function(_, opts)
       local path = require("mason-registry").get_package("debugpy"):get_install_path() .. "/venv/bin/python"
       require("dap-python").setup(path, opts)
+
+      local dap = require "dap"
+      table.insert(dap.configurations.python, {
+        type = "python",
+        request = "launch",
+        name = "FastAPI module",
+        module = "uvicorn",
+        args = {
+          "main:app",
+          "--use-colors",
+          -- '--reload', -- doesn't work
+        },
+        pythonPath = "python",
+        console = "integratedTerminal",
+      })
     end,
   },
   {
