@@ -5,9 +5,9 @@ return {
     event = "User AstroFile",
     main = "rainbow-delimiters.setup",
   },
-  {
-    "catppuccin/nvim",
-    optional = true,
-    opts = { integrations = { rainbow_delimiters = true } },
-  },
+  -- {
+  --   "catppuccin/nvim",
+  --   optional = true,
+  --   opts = { integrations = { rainbow_delimiters = false } },
+  -- },
 }
