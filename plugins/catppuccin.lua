@@ -8,6 +8,9 @@ return {
           base = "#000000",
         },
       },
+      integrations = {
+        treesitter_context = true,
+      },
     },
   },
 }
